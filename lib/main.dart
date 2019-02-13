@@ -33,7 +33,7 @@ class RandomWordsState extends State<RandomWords> {
   // final _biggerFont = const TextStyle(fontSize: 18.0);
 
   final List<WordPair> _suggestions = <WordPair>[];
-  final Set<WordPair> _saved = new Set<WordPair>();   // Add this line.
+  final Set<WordPair> _saved = new Set<WordPair>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
 
   // @override
@@ -58,9 +58,9 @@ class RandomWordsState extends State<RandomWords> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Startup Name Generator'),
-        actions: <Widget>[      // Add 3 lines from here...
+        actions: <Widget>[
           new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved),
-        ],                      // ... to here.
+        ],
       ),
       body: _buildSuggestions(),
     );
@@ -68,7 +68,7 @@ class RandomWordsState extends State<RandomWords> {
 
   void _pushSaved() {
   Navigator.of(context).push(
-    new MaterialPageRoute<void>(   // Add 20 lines from here...
+    new MaterialPageRoute<void>(
       builder: (BuildContext context) {
         final Iterable<ListTile> tiles = _saved.map(
           (WordPair pair) {
@@ -87,15 +87,15 @@ class RandomWordsState extends State<RandomWords> {
           )
           .toList();
 
-        return new Scaffold(         // Add 6 lines from here...
+        return new Scaffold(
           appBar: new AppBar(
             title: const Text('Saved Suggestions'),
           ),
           // body: new ListView(children: divided),
           body: new ListView(children: divided),
-        );                           // ... to here
+        );
       },
-    ),                           // ... to here.
+    ),
   );
 }
 
@@ -115,17 +115,17 @@ class RandomWordsState extends State<RandomWords> {
 }
 
 Widget _buildRow(WordPair pair) {
-  final bool alreadySaved = _saved.contains(pair);  // Add this line.
+  final bool alreadySaved = _saved.contains(pair);
   return ListTile(
     title: Text(
       pair.asPascalCase,
       style: _biggerFont,
     ),
-    trailing: new Icon(   // Add the lines from here... 
+    trailing: new Icon(
       alreadySaved ? Icons.favorite : Icons.favorite_border,
       color: alreadySaved ? Colors.red : null,
-    ),                    // ... to here.
-    onTap: () {      // Add 9 lines from here...
+    ),
+    onTap: () {
       setState(() {
         if (alreadySaved) {
           _saved.remove(pair);
@@ -133,7 +133,7 @@ Widget _buildRow(WordPair pair) {
           _saved.add(pair); 
         } 
       });
-    },               // ... to here.
+    },
   );
 }
 
